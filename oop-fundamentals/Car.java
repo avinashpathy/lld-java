@@ -66,6 +66,12 @@ public class Car implements Vehicle {
     public void brake() {
         System.out.println("Car brake applied...");
     }
+
+   // Car depends on FuelPump to refill fuel
+    public void refuel(FuelPump fuelPump) {
+        fuelPump.fillFuel(); // Using FuelPump temporarily
+        System.out.println(brand + " has been refueled successfully!");
+    }
     
     public static void main(String[] args){
         Car obj = new Car("Audi", "Q3", 120, CarType.SUV);
