@@ -8,5 +8,21 @@ Key Characteristics of Composition:
     The parts are not shared with any other object.
     The part has no independent meaning or identity outside the whole.
     If the part makes no sense without the whole, use composition.
+
+Example - House has rooms and rooms cannot exist without house.
 */
 
+import java.util.*;
+
+class Composition {
+    public static void main(String[] args){
+        Room r1 = new Room("Bedroom");
+        Room r2 = new Room("Kitchen");
+        Room r3 = new Room("Living room");
+
+        List<Room>rooms = List.of(r1,r2,r3);
+
+        House house = new House(rooms);
+        house.showHouse();
+    }
+}

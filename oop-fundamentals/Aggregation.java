@@ -10,6 +10,8 @@ Key Characteristics of Aggregation:
     The whole does not own the part.
     The part can be shared among multiple wholes.
     Both the whole and the part can be created and destroyed independently.
+
+Example - Department has professors. Professors are part of a department but both can exist independently.
 */
 import java.util.*;
 
