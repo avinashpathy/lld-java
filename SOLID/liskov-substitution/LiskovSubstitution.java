@@ -47,50 +47,44 @@ Substituting Bicycle where a Bike is expected breaks the logic — LSP violated.
 
 */
 
-// With LSP
-
-// 1️⃣ Base class for all bikes
-abstract class Bike {
-    public abstract void accelerate();
-}
-
-// 2️⃣ Separate interface for engine-powered bikes
-interface EnginePowered {
+// Vehicles with engines implement this
+interface EngineVehicle {
     void startEngine();
 }
 
-// 3️⃣ Motorcycle - engine powered
-class Motorcycle extends Bike implements EnginePowered {
+// Bike is now just a general class
+class Bike {
+    public void pedal() {
+        System.out.println("Pedaling the bike...");
+    }
+}
+
+// Motorcycle HAS an engine → implements EngineVehicle
+class Motorcycle extends Bike implements EngineVehicle {
     @Override
     public void startEngine() {
         System.out.println("Motorcycle engine started!");
     }
-
-    @Override
-    public void accelerate() {
-        System.out.println("Motorcycle accelerating using engine power!");
-    }
 }
 
-// 4️⃣ Bicycle - non-engine powered
+// Bicycle DOES NOT have an engine → no startEngine()
 class Bicycle extends Bike {
     @Override
-    public void accelerate() {
-        System.out.println("Bicycle accelerating using pedals!");
+    public void pedal() {
+        System.out.println("Bicycle pedaling...");
     }
 }
 
-// 5️⃣ Main class
 public class Main {
     public static void main(String[] args) {
-        Bike cycle = new Bicycle();
-        Bike moto = new Motorcycle();
-
-        cycle.accelerate();
-        moto.accelerate();
-
-        // ✅ Only engine-powered bikes can start engine
-        EnginePowered poweredBike = new Motorcycle();
-        poweredBike.startEngine();
+        // Using EngineVehicle abstraction
+        EngineVehicle v1 = new Motorcycle();
+        v1.startEngine();   // ✅ Works safely for all EngineVehicle types
+        
+        // Using Bike abstraction
+        Bike v2 = new Bicycle();
+        v2.pedal();         // ✅ Works safely
+        
+        // No situation where Bicycle is forced to startEngine()
     }
 }
